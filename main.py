@@ -1,13 +1,10 @@
 import json
 import requests
 from geopy import distance
-from pprint import pp
 import folium
-import os
-from dotenv import load_dotenv
+from decouple import config
 
-load_dotenv()
-API_KEY = os.getenv("API_KEY")
+API_KEY = config("API_KEY")
 
 
 def fetch_coordinates(apikey, address):
@@ -69,7 +66,6 @@ def main():
     user_coordinates = get_user_position(user_coordinates)
     closest_coffee = get_nearest_coffee_shops(coffee_shops, user_coordinates)
     create_map(user_coordinates, closest_coffee)
-    pp(closest_coffee)
 
 
 if __name__ == "__main__":
